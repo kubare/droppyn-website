@@ -1,11 +1,10 @@
 import React from 'react';
-import data from '../../pages/data';
 import { ProductMiniatureBuy } from '../ProductMiniatureBuy'
-export const ListProduct = () => {
+export const ListProduct = ({data}) => {
 
   //  let fourProducts = data.products.slice(1, 4)
  //   fourProducts = fourProducts.map(product => (
-     const product = data.products.map(product => (
+     const product = data.map(product => (
         <ProductMiniatureBuy
         key={product.id} 
         link={`/product/${product.model}`} 

@@ -2,7 +2,7 @@ import React from 'react';
 import { ListProduct } from '../Components/HomeComponents/ListProduct';
 import Header from '../Components/HomeComponents/Header';
 
-const HomePage = () => {
+const HomePage = ({data}) => {
 
     return (
         <>
@@ -16,9 +16,10 @@ const HomePage = () => {
     
             <div className="row">
                 <div className="col">
+             
                 </div>
                 <div className="col-6">
-                <ListProduct />
+                <ListProduct data={data} />
                 </div>
                 <div className="col">
                 </div>

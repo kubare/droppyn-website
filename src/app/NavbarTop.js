@@ -1,9 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar, Nav, Container } from 'react-bootstrap';
 
-
-
-
 const NavbarTop = () => {
 
   /* const menu = menuList.map(item => (

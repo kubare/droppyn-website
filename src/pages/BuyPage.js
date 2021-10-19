@@ -1,18 +1,17 @@
 import React, { useState } from 'react';
 import Filter from '../Components/BuyComponents/Filter';
 import BuyListProducts from '../Components/BuyComponents/BuyListProducts';
-import data from './data'
 
-export default function BuyPage() {
+export default function BuyPage({ data }) {
     const [search, setSearch] = useState("");
 
     const handleSearch = (e) => {
         setSearch(e.target.value);
     }
 
-    const filteredProducts = data.products.filter(product => {
-        return product.model.toLowerCase().includes( search.toLowerCase() )  
-    })
+    const filteredProducts = data.filter(product => {
+        return product.brand.toLowerCase().includes( search.toLowerCase() )  
+    }) 
     
     return (
         <>

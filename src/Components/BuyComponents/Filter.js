@@ -9,14 +9,8 @@ export default function Filter(props) {
             <h5>Search for items..</h5>
         </div>
             <Form.Control type="text" placeholder="Search" onChange={props.handleSearch}/>
-            <div className="font" style={{paddingTop: "30px", fontWeight: "bold"}}>
+        {/*      <div className="font" style={{paddingTop: "30px", fontWeight: "bold"}}>
             <Col sm={10}>
-                <Form.Check
-                type="radio"
-                label="Supreme"
-                name="formHorizontalRadios"
-                id="formHorizontalRadios1"
-                />
                 <Form.Check
                 type="radio"
                 label="Nike"
@@ -31,30 +25,12 @@ export default function Filter(props) {
                 />
                 <Form.Check
                 type="radio"
-                label="Palace"
-                name="formHorizontalRadios"
-                id="formHorizontalRadios3"
-                />
-                <Form.Check
-                type="radio"
-                label="Jordan"
-                name="formHorizontalRadios"
-                id="formHorizontalRadios3"
-                />
-                <Form.Check
-                type="radio"
-                label="Bape"
-                name="formHorizontalRadios"
-                id="formHorizontalRadios3"
-                />
-                <Form.Check
-                type="radio"
-                label="Misbhv"
+                label="Asisc"
                 name="formHorizontalRadios"
                 id="formHorizontalRadios3"
                 />
             </Col>
-            </div>
+    </div> */}
         </div>
     )
 }
