@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
+import { Link } from 'react-router-dom'
 import { Image } from 'react-bootstrap'
 
 export default function ListShoes() {
@@ -53,8 +54,9 @@ export default function ListShoes() {
             <td>{item.model}</td>
             <td>{item.date}</td>
             <td>{item.price}$</td>
-            <td><button onClick={() => deleteShoes(item.id)}>DEL</button>
-              <button>UPD</button>
+            <td>
+              <button onClick={() => deleteShoes(item.id)}>DEL</button>
+              <Link to={"/edit/"+item.id}><button>UPD</button></Link>
             </td>
           </tr>
           )}

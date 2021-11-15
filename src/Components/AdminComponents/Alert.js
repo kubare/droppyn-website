@@ -1,10 +1,10 @@
 import React from "react";
 
-export default function Alert() {
+export default function Alert(props) {
   return (
     <div style={{display:"flex", justifyContent:"center"}}>
       <div class="alert alert-success w-25 p-3" role="alert">
-        Success! You added your item!
+        {props.message}
       </div>
     </div>
   );

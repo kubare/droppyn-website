@@ -34,7 +34,8 @@ const App = () => {
                 <Route path="/buy" render={() => <BuyPage data={data} />} />
                 <Route path="/buys/:model" component={ProductDetails} />
                 <Route path="/add" render={() => <AddShoes />} />
-                <Route path="/list" render={() => <ListShoes data={data} setData={setData} />} />
+                <Route path="/edit/:id" render={() => <AddShoes />} />
+                <Route path="/list" render={() => <ListShoes />} />
             </Switch>
           </Router>
   )

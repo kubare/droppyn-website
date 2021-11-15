@@ -1,143 +1,161 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 import Alert from "./Alert";
 
-export default class AddShoes extends Component {
-  constructor(props) {
-    super(props);
-    this.state = this.startValue;
-    this.state.show = false;
-    this.state.freeze = false;
-    this.shoesChange = this.shoesChange.bind(this);
-    this.submitShoes = this.submitShoes.bind(this);
-  }
+const initialValues = {
+  id: "",
+  brand: "",
+  model: "",
+  date: "",
+  price: "",
+  img: "",
+};
 
-  startValue = {
+export default function AddShoes(props) {
+  const [values, setValues] = useState({
+    id: "",
     brand: "",
     model: "",
     date: "",
     price: "",
     img: "",
+  });
+  const [show, setShow] = useState(false);
+  const history = useHistory();
+
+  const handleSetInputs = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value });
   };
 
-  shoesChange = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value,
-    });
-  };
+  // useEffect(() => {
+  //   const shoesId = props.match.params.id;
+  //   if(shoesId) {
+  //     findShoesById(shoesId)
+  //   }
+  // }, [])
 
-  submitShoes = (event) => {
+  // const findShoesById = (shoesId) => {
+  //   axios.get("http://localhost:8080/api?index="+shoesId)
+  //   .then(res => {
+  //     if(res.data != null) {
+  //       setValues(initialValues)
+  //     }
+  //   })
+  // }
+
+  let submitShoes = (event) => {
     event.preventDefault();
 
-    const shoes = {
-      brand: this.state.brand,
-      model: this.state.model,
-      date: this.state.date,
-      price: this.state.price,
-      img: this.state.img,
-    };
-
-    axios.post("http://localhost:8080/api", shoes).then((response) => {
+    axios.post("http://localhost:8080/api", values)
+    .then((response) => {
       if (response.data != null) {
-        this.setState({ show: true });
-        setTimeout(() => this.setState({ show: false }), 3000);
+        setShow(true);
+        setTimeout(() => setShow(false), 3000);
       } else {
-        this.setState({ show: false });
+        setShow(false);
       }
     });
-
-    this.setState(this.startValue);
+    setValues(initialValues);
   };
 
-  render() {
-    const { brand, model, date, price, img } = this.state;
-
-    return (
-      <>
-        <div className="d-flex justify-content-center pt-5">
-          <div className="border w-50 p-3">
-            {this.state.show ? <Alert /> : null}
-            <label for="formGroupExampleInput">Add Items</label>
-            <form onSubmit={this.submitShoes}>
-              <div class="row">
-                <div class="col">
-                  <div class="form-outline">
-                    <input
-                      type="text"
-                      value={brand}
-                      name="brand"
-                      onChange={this.shoesChange}
-                      placeholder="brand"
-                      class="form-control"
-                    />
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="form-outline">
-                    <input
-                      type="text"
-                      value={model}
-                      name="model"
-                      onChange={this.shoesChange}
-                      placeholder="model"
-                      class="form-control"
-                    />
-                  </div>
-                </div>
-              </div>
-              <br />
-              <div class="row">
-                <div class="col">
-                  <div class="form-outline">
-                    <input
-                      type="date"
-                      value={date}
-                      name="date"
-                      onChange={this.shoesChange}
-                      placeholder="date"
-                      class="form-control"
-                    />
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="form-outline">
-                    <input
-                      type="number"
-                      value={price}
-                      name="price"
-                      onChange={this.shoesChange}
-                      placeholder="price"
-                      class="form-control"
-                    />
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="form-outline">
-                    <input
-                      type="url"
-                      value={img}
-                      name="img"
-                      onChange={this.shoesChange}
-                      placeholder="img"
-                      class="form-control"
-                    />
-                  </div>
-                </div>
-              </div>
-              <br />
-              <div className="d-flex justify-content-end">
-                <button
-                  type="submit"
-                  onSubmit={this.submitShoes}
-                  class="btn btn-primary"
-                >
-                  Add
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </>
-    );
+  let handleClickUpdate = () => {
+    history.push("/list")
   }
+
+  return (
+    <div>
+      <div className="d-flex justify-content-center pt-5">
+        <div className="border w-50 p-3">
+           {show ? <Alert message="Success! You added your item!" /> : null} 
+          <label for="formGroupExampleInput">Add Items</label>
+          <form onSubmit={submitShoes}>
+            <div class="row">
+              <div class="col">
+                <div class="form-outline">
+                  <input
+                    type="text"
+                    name="brand"
+                    value={values.brand}
+                    onChange={handleSetInputs}
+                    placeholder="brand"
+                    class="form-control"
+                  />
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-outline">
+                  <input
+                    type="text"
+                    value={values.model}
+                    name="model"
+                    onChange={handleSetInputs}
+                    placeholder="model"
+                    class="form-control"
+                  />
+                </div>
+              </div>
+            </div>
+            <br />
+            <div class="row">
+              <div class="col">
+                <div class="form-outline">
+                  <input
+                    type="date"
+                    value={values.date}
+                    name="date"
+                    onChange={handleSetInputs}
+                    placeholder="date"
+                    class="form-control"
+                  />
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-outline">
+                  <input
+                    type="number"
+                    value={values.price}
+                    name="price"
+                    onChange={handleSetInputs}
+                    placeholder="price"
+                    class="form-control"
+                  />
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-outline">
+                  <input
+                    type="url"
+                    value={values.img}
+                    name="img"
+                    onChange={handleSetInputs}
+                    placeholder="img"
+                    class="form-control"
+                  />
+                </div>
+              </div>
+            </div>
+            <br />
+            <div className="d-flex justify-content-end">
+              <button
+                style={{marginRight:"5px"}}
+                type="submit"
+                onSubmit={submitShoes}
+                class="btn btn-primary"
+              >
+                Add
+              </button>{' '}
+              <button
+                type="submit"
+                onClick={handleClickUpdate}
+                class="btn btn-primary"
+              >
+                List Items
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
 }
